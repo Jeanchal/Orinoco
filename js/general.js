@@ -1,4 +1,3 @@
-//---------------------------------------
 const cameras = [
   {
     lenses: ["35mm 1.4", "50mm 1.6"],
@@ -47,17 +46,60 @@ const cameras = [
   },
 ];
 
-const main = document.querySelector("main");
-const TotalCmd = localStorage.getItem("TotalCommande");
-let tableauPrix = [0];
-let versions = 0;
-let totalBtnNb = Number(localStorage.getItem("TotalPanier"));
-let nbpanier = document.querySelector("header span");
+// let cameras = [];
 
-function initGeneral() {
+// const loadpage = fetch("http://localhost:3000/api/cameras")
+//   .then(function (res) {
+//     if (res.ok) {
+//       return res.json();
+//     }
+//   }).then(function (value) {
+//     cameras = value;
+//   }).catch(function () {
+//     console.log("erreur fetch");
+//   });
+
+// let versions = [
+//   { v0: 0, v1: 0 },
+//   { v0: 0, v1: 0, v2: 0 },
+//   { v0: 0 },
+//   { v0: 0, v1: 0 },
+//   { v0: 0, v1: 0, v2: 0 },
+// ];
+
+let versions = [
+  { v0: 0, v1: 0, v2: 0 },
+  { v0: 0, v1: 0, v2: 0 },
+  { v0: 0, v1: 0, v2: 0 },
+  { v0: 0, v1: 0, v2: 0 },
+  { v0: 0, v1: 0, v2: 0 },
+];
+
+function initGeneral(main) {
+  let totalBtnNb = Number(localStorage.getItem("TotalPanier"));
   const conteneur = document.createElement("div");
   conteneur.id = "conteneur";
   main.appendChild(conteneur);
+  let nbpanier = document.querySelector("header span");
+  document.addEventListener("updateCart", (e) => {
+    const nbArticle = e.detail.nbArticle;
+    if (nbArticle > 0) {
+      nbpanier.innerText = nbArticle;
+    } else {
+      nbpanier.innerText = "";
+    }
+  });
+  dispatchUpdateNbPanier(totalBtnNb);
+  background();
+}
+
+function dispatchUpdateNbPanier(nbArticle) {
+  let updatePanier = new CustomEvent("updateCart", {
+    detail: {
+      nbArticle: nbArticle,
+    },
+  });
+  document.dispatchEvent(updatePanier);
 }
 
 function background() {
@@ -74,20 +116,11 @@ function background() {
   document.body.classList.add("background");
 }
 
-//---Visibilité nombre d'articles dans le panier---
-function NbPanier(totalBtnNb) {
-  if (totalBtnNb > 0) nbpanier.innerText = totalBtnNb;
+function Versions() {
+  for (let i = 0; i < versions.length; i++) {
+    versions[i].v0 = Number(localStorage.getItem(cameras[i].name + "/v0"));
+    versions[i].v1 = Number(localStorage.getItem(cameras[i].name + "/v1"));
+    versions[i].v2 = Number(localStorage.getItem(cameras[i].name + "/v2"));
+  }
 }
-
-// fetch("http://localhost:3000/api/cameras")
-//   .then(function (res) {
-//     if (res.ok) {
-//       return res.json();
-//     }
-//   })
-//   .then(function (value) {
-//     console.log(value);
-//   })
-//   .catch(function (err) {
-//     console.log("Une erreur est survenue");
-//   });
+Versions();

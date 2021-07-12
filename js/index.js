@@ -1,4 +1,4 @@
-function initIndex() {
+function initIndex(conteneur) {
   //----Création des boites (dans une boucle)
   for (let i = 0; i < cameras.length; i++) {
     //-----Création des éléments-------------------
@@ -31,10 +31,10 @@ function initIndex() {
 }
 
 window.onload = () => {
-  initGeneral();
-  background();
-  NbPanier(totalBtnNb);
-  initIndex();
+  const main = document.querySelector("main");
+  new initGeneral(main);
+  const conteneur = document.querySelector("#conteneur");
+  new initIndex(conteneur);
 };
 
 // lien.addEventListener("click", (e) => {

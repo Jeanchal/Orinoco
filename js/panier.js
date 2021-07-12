@@ -1,4 +1,4 @@
-function Panier(main, nbpanier) {
+function Panier(main) {
   const conteneurPanier = document.createElement("div");
   this.conteneurPanier = conteneurPanier;
   const totalPanier = document.createElement("p");
@@ -7,13 +7,14 @@ function Panier(main, nbpanier) {
   const btnViderPanier = document.createElement("button");
   let identifiant = Math.floor(Math.random() * 1000000);
   const conteneur = main.querySelector("#conteneur");
+  let tableauPrix = [0];
   //---------------------------
   conteneurPanier.id = "conteneur-panier";
   messagePanier.classList.add("message");
   //-------------------------
   main.appendChild(conteneurPanier);
   conteneurPanier.appendChild(messagePanier);
-  if (nbpanier.textContent > 0) {
+  if (localStorage.getItem("TotalPanier") > 0) {
     conteneurPanier.removeChild(messagePanier);
     conteneurPanier.appendChild(totalPanier);
     conteneurPanier.appendChild(btnCommander);
@@ -43,7 +44,7 @@ function Panier(main, nbpanier) {
     image.src = cameras[i].imageUrl;
     nom.textContent = cameras[i].name;
     prix.textContent = totalPrix;
-    versionProduit.textContent = `Versions: ${cameras[i].lenses}`;
+    versionProduit.textContent = `lentille: ${cameras[i].lenses[0]}`;
     numPanierNb.textContent = Number(localStorage.getItem(cameras[i].name));
     //-----------------------------------------
     if (numPanierNb.textContent > 0) {
@@ -76,7 +77,7 @@ function Panier(main, nbpanier) {
     conteneurPanier.innerHTML = "";
     conteneurPanier.appendChild(messagePanier);
     localStorage.clear();
-    nbpanier.innerText = "";
+    dispatchUpdateNbPanier(0);
   };
   this.commanderPanier = () => {
     localStorage.setItem("TotalCommande", Total);
@@ -93,22 +94,19 @@ function Panier(main, nbpanier) {
 }
 
 window.onload = () => {
-  initGeneral();
-  background();
-  NbPanier(totalBtnNb);
-  new Panier(main, nbpanier);
+  const main = document.querySelector("main");
+  new initGeneral(main);
+  new Panier(main);
 };
 
-// function formulaire() {
-//     const form = document.createElement("form");
-//     const nomLabel = document.createElement("label");
-//     const nom = document.createElement("input");
-//     const prenom = document.createElement("input");
-//     const email = document.createElement("input");
-//     conteneurPanier.appendChild(form);
-//     form.appendChild(nomLabel);
-//     form.appendChild(nom);
-//     form.appendChild(prenom);
-//     form.appendChild(email);
-// }
-// formulaire();
+// this.removePanier = (event) => {
+//   let reponse = window.confirm("Souhaitez-vous vraiment vider le panier?");
+//   if (reponse == false) {
+//     event.preventDefault();
+//   }
+//   conteneur.innerHTML = "";
+//   conteneurPanier.innerHTML = "";
+//   conteneurPanier.appendChild(messagePanier);
+//   localStorage.clear();
+//   dispatchUpdateNbPanier(0);
+// };
