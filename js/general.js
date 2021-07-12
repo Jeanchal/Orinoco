@@ -6,7 +6,7 @@ const cameras = [
     price: 49900,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    imageUrl: "http://localhost:3000/images/vcam_1.jpg",
+    imageUrl: "../images/vcam_1.jpg",
   },
   {
     lenses: ["50mm 1.8", "60mm 2.8", "24-60mm 2.8/4.5"],
@@ -15,7 +15,7 @@ const cameras = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     price: 309900,
-    imageUrl: "http://localhost:3000/images/vcam_2.jpg",
+    imageUrl: "../images/vcam_2.jpg",
   },
   {
     lenses: ["25mm 4.5"],
@@ -24,7 +24,7 @@ const cameras = [
     price: 209900,
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    imageUrl: "http://localhost:3000/images/vcam_3.jpg",
+    imageUrl: "../images/vcam_3.jpg",
   },
   {
     lenses: ["50mm 1.7", "35mm 1.4"],
@@ -33,7 +33,7 @@ const cameras = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     price: 159900,
-    imageUrl: "http://localhost:3000/images/vcam_4.jpg",
+    imageUrl: "../images/vcam_4.jpg",
   },
   {
     lenses: ["50mm 1.4", "35mm 1.8", "28-200mm 2.8/4.5"],
@@ -42,7 +42,7 @@ const cameras = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     price: 59900,
-    imageUrl: "http://localhost:3000/images/vcam_5.jpg",
+    imageUrl: "../images/vcam_5.jpg",
   },
 ];
 
