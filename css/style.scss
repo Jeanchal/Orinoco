@@ -43,6 +43,9 @@ $gris-clair: rgb(105, 105, 105);
     height: 1200px;
   }
 }
+@mixin transition {
+  transition: 0.3s ease-in-out;
+}
 
 .background {
   background-size: cover;
@@ -65,6 +68,28 @@ body {
   .invisible {
     display: none !important;
   }
+  .retour {
+    @include transition;
+    font-style: italic;
+    font-weight: bold;
+    width: 150px;
+    height: 50px;
+    position: relative;
+    border-radius: 5px;
+    bottom: 540px;
+    right: 440px;
+    span {
+      font-size: 150%;
+      opacity: 0.7;
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
+      i {
+        font-size: 70%;
+      }
+    }
+  }
   .message {
     font-size: 130% !important;
     line-height: 30px;
@@ -81,32 +106,39 @@ header {
   @include bckgrndBeige;
   @include flexColumn;
   figure {
-    width: 80%;
+    width: 55%;
     margin: 0;
-    @media (min-width: 600px) {
+    @media (min-width: 400px) {
       width: 90%;
     }
     img {
-      width: 150px;
+      width: 160px;
       height: 75px;
+      @media (min-width: 600px) {
+        width: 190px;
+        height: 95px;
+      }
     }
   }
   nav {
     background-color: white;
     @include boxShadow;
-    padding: 10px 0 10px 0;
-    font-size: 100%;
+    padding: 16px 0 16px 0;
+    font-size: 90%;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    @media (min-width: 400px) {
-      font-size: 120%;
+    @media (min-width: 500px) {
+      font-size: 110%;
+    }
+    @media (min-width: 700px) {
+      font-size: 130%;
     }
     a,
     a:active,
     a:visited {
       color: $gris-clair !important;
-      transition: 0.3s ease-in-out;
+      @include transition;
       font-weight: bold;
     }
     a:hover {
@@ -120,7 +152,7 @@ header {
         font-size: 90%;
         margin-left: 7px;
         color: $gris-clair;
-        transition: 0.3s ease-in-out;
+        @include transition;
       }
       .fa-shopping-bag {
         font-size: 110%;
@@ -161,21 +193,31 @@ main {
   padding: 20px 0 40px 0;
   min-height: 350px;
   form {
+    @include flexColumn;
+    align-items: center;
     font-size: 110%;
+    width: 90%;
     h3 {
       text-align: center;
-      font-size: 160%;
+      font-size: 180%;
       width: 93%;
       padding-bottom: 10px;
     }
     input {
-      transition: 0.3s ease-in-out;
-      width: 400px;
-      height: 30px;
+      @include transition;
+      width: 90%;
+      height: 40px;
       border: 3px solid grey;
       border-radius: 5px;
-      padding: 10px;
+      padding: 10px 0 0 10px;
       font-size: 90%;
+      margin-top: 20px;
+      @media (min-width: 750px) {
+        width: 70%;
+      }
+      @media (min-width: 950px) {
+        width: 50%;
+      }
       &:focus {
         background-color: rgb(227, 234, 248);
         border: 3px solid black;
@@ -185,36 +227,18 @@ main {
         border: 3px solid black;
       }
     }
-    .nom {
-      input {
-        width: 180px !important;
-      }
-      input:nth-child(2) {
-        margin-left: 10px;
-      }
-    }
-    .afficherMDP {
-      text-align: start;
-      width: 30px;
-      position: relative;
-      top: 10px;
-      right: 40px;
-      input {
-        width: 20px;
-      }
-    }
     #btnValider {
+      margin-top: 40px !important;
       font-size: 110% !important;
       background-color: $gris;
       color: white;
       font-weight: bold;
-      margin-top: 15px;
-      transition: 0.3s ease-in-out;
+      padding-bottom: 5px;
+      @include transition;
       height: 50px !important;
-      width: 425px !important;
       border: 3px solid $gris !important;
       &:hover {
-        @include btnHover();
+        @include btnHover;
       }
       &:focus {
         background-color: $gris !important;
@@ -226,13 +250,20 @@ main {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    @media (min-width: 500px) {
+      width: 80%;
+      @include transition;
+    }
+    @media (min-width: 750px) {
+      width: 95%;
+    }
     .box {
       background-color: white;
       margin: 20px 20px 20px 20px;
       border-radius: 20px;
       @include boxShadow;
       &:hover {
-        @include btnHover();
+        @include btnHover;
       }
       a figure {
         margin: 0;
@@ -283,6 +314,7 @@ main {
       @media (min-width: 750px) {
         flex-direction: initial;
         justify-content: space-between;
+        @include transition;
       }
       &:hover {
         opacity: 1 !important;
@@ -307,6 +339,15 @@ main {
         align-items: center;
         @media (min-width: 400px) {
           font-size: 120% !important;
+          @include transition;
+        }
+        @media (min-width: 750px) {
+          font-size: 100% !important;
+          @include transition;
+        }
+        @media (min-width: 850px) {
+          font-size: 120% !important;
+          @include transition;
         }
         > div {
           @include flexColumn;
@@ -328,6 +369,9 @@ main {
           p:nth-child(2) {
             font-size: 120%;
           }
+          select:focus {
+            outline: none;
+          }
           button {
             margin: 5px 0 10px 5px;
             width: 95%;
@@ -337,9 +381,10 @@ main {
             color: white;
             font-weight: bold;
             margin-top: 15px;
-            transition: 0.3s ease-in-out;
+            @include transition;
+
             &:hover {
-              @include btnHover();
+              @include btnHover;
             }
           }
         }
@@ -348,7 +393,7 @@ main {
     .box-panier {
       @include bckgrndBeige;
       width: 95% !important;
-      height: 110px !important;
+      height: 105px !important;
       display: flex;
       margin: 20px 10px 5px 10px !important;
       border-radius: 22px !important;
@@ -369,7 +414,7 @@ main {
         @include dim100;
         margin: 0;
         @media (min-width: 350px) {
-          width: 190px !important;
+          width: 150px !important;
         }
         img {
           @include dim100;
@@ -379,9 +424,17 @@ main {
         }
       }
       .box-txt {
-        width: 100%;
-        font-size: 70% !important;
-        @media (min-width: 500px) {
+        font-size: 65% !important;
+        @media (min-width: 350px) {
+          width: 100%;
+        }
+        @media (min-width: 570px) {
+          font-size: 80% !important;
+        }
+        @media (min-width: 700px) {
+          font-size: 85% !important;
+        }
+        @media (min-width: 800px) {
           font-size: 80% !important;
         }
         > div {
@@ -392,11 +445,13 @@ main {
           @media (min-width: 350px) {
             width: 100%;
           }
-          @media (min-width: 950px) {
+          @media (min-width: 800px) {
             display: flex;
             flex-direction: initial;
             height: 100%;
             align-items: center;
+          }
+          @media (min-width: 950px) {
             font-size: 120%;
           }
           @media (min-width: 1050px) {
@@ -410,34 +465,29 @@ main {
             }
           }
           h3 {
+            overflow: hidden;
             font-size: 130% !important;
             width: 100px;
-            @media (min-width: 500px) {
-              width: 160px;
+            @media (min-width: 550px) {
+              width: 190px;
+            }
+            @media (min-width: 950px) {
+              width: 260px;
             }
           }
           p:nth-child(2) {
+            font-size: 140%;
             text-overflow: nowrap !important;
-            width: 60px;
+            width: 80px;
           }
           p:nth-child(2)::after {
             content: " €";
           }
-          p:nth-child(3) {
-            font-size: 100%;
-            @media (min-width: 420px) {
-              width: 95%;
-            }
-            @media (min-width: 950px) {
-              width: 160px;
-            }
-            @media (min-width: 1200px) {
-              width: 300px;
-            }
-          }
           .nbpanier {
-            font-size: 110%;
+            font-size: 140%;
             font-weight: bold;
+            color: red;
+            text-shadow: 1px 2px 1px white;
           }
         }
       }
@@ -473,15 +523,19 @@ main {
         font-size: 85%;
       }
       &:hover {
-        @include btnHover();
+        @include btnHover;
       }
     }
   }
   #conteneur-commande {
+    @include flexColumn;
+    align-items: center;
+    p:nth-child(1) {
+      text-align: center;
+    }
     p:nth-child(2),
     p:nth-child(3) {
       font-size: 120%;
-      text-align: center;
     }
     p:nth-child(2) {
       margin-top: 50px;
