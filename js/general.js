@@ -14,16 +14,10 @@ function initGeneral(main) {
     }
   });
   function background() {
-    const tabImages = [
-      "url(../images/font.jpg)",
-      "url(../images/font1.jpg)",
-      "url(../images/font2.jpg)",
-      "url(../images/font3.jpg)",
-      "url(../images/font4.jpg)",
-    ];
+    const tabImages = ["b0", "b1", "b2", "b3", "b4"];
     const randomimages =
       tabImages[Math.floor(Math.random() * tabImages.length)];
-    document.body.style.backgroundImage = randomimages;
+    document.body.classList.add(randomimages);
   }
   dispatchUpdateNbPanier(totalBtnNb);
   background();
