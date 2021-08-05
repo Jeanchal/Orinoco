@@ -94,9 +94,15 @@ function Produit(main) {
     localStorage.setItem("TotalPanier", totalBtnNb + 1);
     dispatchUpdateNbPanier(totalBtnNb + 1);
   };
-  getData("http://localhost:3000/api/cameras/" + i, (camera) => {
-    this.initProduit(camera);
-  });
+  getData(
+    "http://localhost:3000/api/cameras/" + i,
+    (camera) => {
+      this.initProduit(camera);
+    },
+    () => {
+      error();
+    }
+  );
   return this;
 }
 

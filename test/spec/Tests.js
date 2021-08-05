@@ -243,7 +243,7 @@ describe("Tests (43 tests)", function () {
     main.innerHTML = "";
     //--Nettoyage des données utilisées pour le test.
   });
-  it("activPanier (3 test)", function () {
+  it("activPanier (3 tests)", function () {
     const body = document.querySelector("body");
     const main = document.createElement("main");
     const conteneur = document.createElement("div");

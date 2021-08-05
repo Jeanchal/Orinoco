@@ -40,21 +40,24 @@ function dispatchUpdateNbPanier(nbArticle) {
   document.dispatchEvent(updatePanier);
 }
 function getData(url, repOk, params = {}) {
-  function error() {
-    console.log("erreur !");
-  }
+  // function error(reponse) {
+  //   console.log(reponse);
+  // }
   fetch(url, params)
     .then(async (reponse) => {
       // console.log(reponse);
+      // console.log(reponse.status);
       if (reponse.ok) {
         const data = await reponse.json();
         repOk(data);
       } else {
-        error();
+        console.log("erreur de connexion !");
+        console.log("Status: " + reponse.status, reponse.statusText);
       }
     })
-    .catch(() => {
-      error();
+    .catch((erreur) => {
+      console.log("impossible de se connecter au serveur, connexion refusée !");
+      console.log(erreur);
     });
 }
 function getQueryParams(param) {

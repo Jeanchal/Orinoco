@@ -5,7 +5,9 @@ function Panier(main) {
   this.conteneurPanier = conteneurPanier;
   let cart = [];
   cartString = localStorage.getItem("cart");
-  cart = JSON.parse(cartString);
+  if (localStorage.getItem("TotalPanier") > 0) {
+    cart = JSON.parse(cartString);
+  }
   //--------------------------------
   this.initPanier = (cameras) => {
     const totalPanier = document.createElement("p");
@@ -255,6 +257,7 @@ function Panier(main) {
       }
     );
   };
+
   getData("http://localhost:3000/api/cameras", (cameras) => {
     this.initPanier(cameras);
   });
