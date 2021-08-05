@@ -24,7 +24,6 @@ function initGeneral(main) {
     const randomimages =
       tabImages[Math.floor(Math.random() * tabImages.length)];
     document.body.style.backgroundImage = randomimages;
-    document.body.classList.add("background");
   }
   dispatchUpdateNbPanier(totalBtnNb);
   background();
