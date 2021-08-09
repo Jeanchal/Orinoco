@@ -1,10 +1,11 @@
-//---initialisation des paramétres communs à chaque page------------
+//---fonction initGeneral: initialise les éléments communs à chaque page.
 function initGeneral(main) {
   let nbpanier = document.querySelector("header span");
   let totalBtnNb = Number(localStorage.getItem("TotalPanier"));
   const conteneur = document.createElement("div");
   main.appendChild(conteneur);
   conteneur.id = "conteneur";
+  //---événement "updateCart": affiche le nombre d'articles dans la barre de navigation, si ce nombre est supérieur à 0.
   document.addEventListener("updateCart", (e) => {
     const nbArticle = e.detail.nbArticle;
     if (nbArticle > 0) {
@@ -13,18 +14,10 @@ function initGeneral(main) {
       nbpanier.innerText = "";
     }
   });
-  function background() {
-    const tabImages = ["b0", "b1", "b2", "b3", "b4"];
-    const randomimages =
-      tabImages[Math.floor(Math.random() * tabImages.length)];
-    document.body.classList.add(randomimages);
-  }
-  dispatchUpdateNbPanier(totalBtnNb);
-  background();
+  UpdateNbPanier(totalBtnNb);
 }
-
-//---mise à jour du nombre d'articles dans le panier (dans la barre de navigation)------------
-function dispatchUpdateNbPanier(nbArticle) {
+//---fonction UpdateNbPanier: mets à jour le nombre d'articles dans le panier (dans la barre de navigation).
+function UpdateNbPanier(nbArticle) {
   let updatePanier = new CustomEvent("updateCart", {
     detail: {
       nbArticle: nbArticle,
@@ -32,14 +25,10 @@ function dispatchUpdateNbPanier(nbArticle) {
   });
   document.dispatchEvent(updatePanier);
 }
+//---fonction getData: permet de faire un fetch pour récupérer, envoyer, mettre à jour ou supprimer de la data.
 function getData(url, repOk, params = {}) {
-  // function error(reponse) {
-  //   console.log(reponse);
-  // }
   fetch(url, params)
     .then(async (reponse) => {
-      // console.log(reponse);
-      // console.log(reponse.status);
       if (reponse.ok) {
         const data = await reponse.json();
         repOk(data);
@@ -53,6 +42,7 @@ function getData(url, repOk, params = {}) {
       console.log(erreur);
     });
 }
+//---fonction getQueryParams: permet de récupérer l'id dans l'Url de la page.
 function getQueryParams(param) {
   const SearchParams = new URLSearchParams(window.location.search);
   return SearchParams.get(param);

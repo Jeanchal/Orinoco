@@ -1,3 +1,4 @@
+//---fonction Panier: englobe toutes les fonctions de la page.
 function Panier(main) {
   const conteneur = main.querySelector("#conteneur");
   const conteneurPanier = document.createElement("div");
@@ -8,19 +9,22 @@ function Panier(main) {
   if (localStorage.getItem("TotalPanier") > 0) {
     cart = JSON.parse(cartString);
   }
-  //--------------------------------
+  //---fonction initPanier: englobe toutes les fonctions qui permettent d'afficher et de manipuler le panier.
   this.initPanier = (cameras) => {
     const totalPanier = document.createElement("p");
     const messagePanier = document.createElement("p");
     const btnCommander = document.createElement("button");
     const btnViderPanier = document.createElement("button");
     let tableauPrix = [0];
-    //---------------------------
+    let Total = 0;
     conteneurPanier.id = "conteneur-panier";
     messagePanier.classList.add("message");
-    //-------------------------
     main.appendChild(conteneurPanier);
     conteneurPanier.appendChild(messagePanier);
+    messagePanier.textContent = "Votre panier est vide...";
+    btnCommander.textContent = "Commander";
+    btnViderPanier.textContent = "Vider le panier";
+    //---fonction activPanier: ajoute les boutons "Commander", "Vider panier", et le total du Panier
     this.activPanier = () => {
       conteneurPanier.removeChild(messagePanier);
       conteneurPanier.appendChild(totalPanier);
@@ -30,11 +34,7 @@ function Panier(main) {
     if (localStorage.getItem("TotalPanier") > 0) {
       this.activPanier();
     }
-    //----------------------------------
-    messagePanier.textContent = "Votre panier est vide...";
-    btnCommander.textContent = "Commander";
-    btnViderPanier.textContent = "Vider le panier";
-    //----------------------------------------------------
+    //---fonction panierConstructor: génére les éléments ajoutés au panier.
     this.panierConstructor = (cart, cameras, a, i) => {
       localStorage.setItem("form", 0);
       id = cart[a].id;
@@ -49,18 +49,15 @@ function Panier(main) {
         const prix = document.createElement("p");
         const panierNb = document.createElement("div");
         const numPanierNb = document.createElement("p");
-        //----------------------------
         lien.href = "produit.html?id=" + id;
         image.src = cameras[i].imageUrl;
         nom.textContent = cameras[i].name + "/" + cart[a].version;
         prix.textContent = cart[a].nb * (cameras[i].price / 100);
         tableauPrix.push(Number(prix.textContent));
         numPanierNb.textContent = cart[a].nb;
-        //-----------------------------------------
         box.classList.add("box", "box-panier");
         boxTxt.classList.add("box-txt");
         panierNb.classList.add("nbpanier");
-        //------------------------
         conteneur.appendChild(box);
         box.appendChild(lien);
         box.appendChild(boxTxt);
@@ -79,33 +76,33 @@ function Panier(main) {
       if (localStorage.getItem("form") < 1) {
         if (totalBtnNb > 0) {
           this.panierConstructor(cart, cameras, i, indexCam);
+          calculPanier(tableauPrix, totalPanier);
         }
       } else {
         this.formulaire();
       }
     }
-    //----Calcul total panier----------------
-    const reducer = (acc, cur) => acc + cur;
-    let Total = tableauPrix.reduce(reducer);
-    totalPanier.textContent = "Total: " + Total + " €";
-    //----------------------------
+    //---fonction removePanier: supprime tout les éléments du panier sur la page et dans le localStorage
     this.removePanier = () => {
       conteneur.innerHTML = "";
       conteneurPanier.innerHTML = "";
       conteneurPanier.appendChild(messagePanier);
       localStorage.clear();
-      dispatchUpdateNbPanier(0);
+      UpdateNbPanier(0);
     };
+    //---fonction commanderPanier: enregistre le total dans le localStorage et vide le cotenu du panier.
     this.commanderPanier = (Total) => {
       localStorage.setItem("TotalCommande", Total);
       conteneur.innerHTML = "";
       conteneurPanier.innerHTML = "";
     };
+    //---événement sur bouton "Commander": appelle les fonctions "commanderPanier", "formulaire", et enregistre l'activation du formualire dans le localStorage.
     btnCommander.addEventListener("click", () => {
       this.commanderPanier(Total);
       this.formulaire();
       localStorage.setItem("form", 1);
     });
+    //---événement sur bouton "Vider Panier": active la fonction removePanier.
     btnViderPanier.addEventListener("click", () => {
       let reponse = window.confirm("Souhaitez-vous vraiment vider le panier?");
       if (reponse == true) {
@@ -113,10 +110,19 @@ function Panier(main) {
       }
     });
   };
+  //---fonction formulaire: génére le formulaire.
   this.formulaire = function () {
-    conteneurPanier.innerHTML = "";
-    //---------------------------
     const form = document.createElement("form");
+    //---fonction creatorForm: pour générer automatiquement une liste d'éléments
+    function creatorForm(element, text) {
+      form.appendChild(element);
+      element.id = text;
+      element.name = text;
+      element.required = true;
+      element.type = "text";
+      element.minLength = "5";
+      element.maxLength = "25";
+    }
     const h3 = document.createElement("h3");
     const prenom = document.createElement("input");
     const nom = document.createElement("input");
@@ -126,77 +132,36 @@ function Panier(main) {
     const btnValider = document.createElement("input");
     const retour = document.createElement("div");
     const spanRetour = document.createElement("span");
-    //-------------------------
+    conteneurPanier.innerHTML = "";
     conteneur.appendChild(form);
     form.appendChild(h3);
-    form.appendChild(prenom);
-    form.appendChild(nom);
-    form.appendChild(adresse);
-    form.appendChild(ville);
-    form.appendChild(email);
+    creatorForm(prenom, "firstName");
+    creatorForm(nom, "lastName");
+    creatorForm(adresse, "address");
+    creatorForm(ville, "city");
+    creatorForm(email, "email");
     form.appendChild(btnValider);
     form.appendChild(retour);
     retour.appendChild(spanRetour);
-    //----------------------
     retour.classList.add("retour", "retourForm");
     spanRetour.innerHTML = '<i class="fas fa-arrow-left"></i> retour';
-    // ----------------------
-    prenom.required = true;
-    nom.required = true;
-    adresse.required = true;
-    ville.required = true;
-    email.required = true;
-    //--------------------------
-    prenom.id = "firstName";
-    nom.id = "lastName";
-    adresse.id = "address";
-    ville.id = "city";
-    email.id = "email";
-    //-----------------
-    prenom.name = "firstName";
-    nom.name = "lastName";
-    adresse.name = "address";
-    ville.name = "city";
-    email.name = "email";
-    //----------------------
-    prenom.type = "text";
     prenom.placeholder = "Prénom";
-    prenom.minLength = "2";
-    prenom.maxLength = "16";
     prenom.autofocus = true;
-    //---------------------
-    nom.type = "text";
     nom.placeholder = "Nom";
-    nom.minLength = "2";
-    nom.maxLength = "18";
-    //--------------------------
-    adresse.type = "text";
     adresse.placeholder = "Adresse";
-    adresse.minLength = "5";
-    adresse.maxLength = "25";
-    //---------------------
-    ville.type = "text";
     ville.placeholder = "Ville";
-    ville.minLength = "5";
-    ville.maxLength = "25";
-    //---------------------
     email.type = "email";
     email.placeholder = "Email";
-    email.minLength = "10";
-    email.maxLength = "25";
-    //--------------------------
     btnValider.type = "submit";
     btnValider.id = "btnValider";
     btnValider.value = "Valider";
-    //--------------------------
     h3.innerText = "Nouveau client ?";
-    //-------------------------------
-    // this.messageCommande.classList.add("invisible");
+    //---événement sur bouton "retour": pour annuler le formulaire et revenir sur le panier.
     retour.addEventListener("click", () => {
       localStorage.setItem("form", 0);
       window.location = "panier.html";
     });
-    //----------------------------------------
+    //---événement "submit" du formulaire: pour venvoyer le formulaire si les données sont conformes.
     form.addEventListener("submit", (e) => {
       const input = document.getElementsByTagName("input");
       let formulaire = 0;
@@ -207,7 +172,6 @@ function Panier(main) {
       }
       if (formulaire === input.length - 1) {
         localStorage.setItem("Pseudo", form.firstName.value);
-        // this.validerFormulaire(form, cart);
         this.validerFormulaire(form);
         if (localStorage.getItem("TotalCommande") > 0) {
           setTimeout(function () {
@@ -222,6 +186,7 @@ function Panier(main) {
       }
     });
   };
+  //---fonction validerFormulaire: vérifie les données du formulaire et les envoie au serveur si conforme.
   this.validerFormulaire = function (form) {
     conteneur.innerHTML = "";
     let cart = [];
@@ -243,6 +208,7 @@ function Panier(main) {
       },
       products: tableauID,
     };
+    //---Utilisation de la fonction getData pour envoyer des données et enregistrer la réponse du serveur.
     getData(
       "http://localhost:3000/api/cameras/order",
       (repServer) => {
@@ -257,15 +223,22 @@ function Panier(main) {
       }
     );
   };
-
+  //---Utilisation de la fonction getData pour récupérer les données de l'Api
   getData("http://localhost:3000/api/cameras", (cameras) => {
     this.initPanier(cameras);
   });
   return this;
 }
-
+//---window.onload: attends la fin du chargement de la page avant d'initialiser les éléments.
 window.onload = () => {
   const main = document.querySelector("main");
   new initGeneral(main);
   new Panier(main);
 };
+
+//---fonction calculPanier: calcul du prix total du panier.
+function calculPanier(tableau, element) {
+  const reducer = (acc, cur) => acc + cur;
+  Total = tableau.reduce(reducer);
+  element.textContent = "Total: " + Total + " €";
+}

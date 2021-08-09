@@ -1,3 +1,4 @@
+//---fonction Produit: englobe toutes les fonctions de la page.
 function Produit(main) {
   const conteneur = main.querySelector("#conteneur");
   this.conteneur = conteneur;
@@ -8,7 +9,7 @@ function Produit(main) {
     cartString = localStorage.getItem("cart");
     cart = JSON.parse(cartString);
   }
-  //-----------------------------------------------------
+  //---fonction initProduit: génére le produit sélectionné
   this.initProduit = (camera) => {
     //-----Création des éléments-------------------
     const box = document.createElement("div");
@@ -27,10 +28,8 @@ function Produit(main) {
     const option3Produit = document.createElement("option");
     const description = document.createElement("p");
     const btnProduit = document.createElement("button");
-    //---------------------------
     box.classList.add("box", "box-produit");
     boxTxt.classList.add("box-txt");
-    //------------------------------
     conteneur.appendChild(box);
     box.appendChild(lien);
     box.appendChild(boxTxt);
@@ -45,7 +44,6 @@ function Produit(main) {
     versionProduit.appendChild(spanProduit);
     versionProduit.appendChild(selectProduit);
     selectProduit.appendChild(option1Produit);
-    //-------------------------------
     lien.href = camera.imageUrl;
     btnProduit.textContent = "Ajouter au panier";
     image.src = camera.imageUrl;
@@ -66,7 +64,7 @@ function Produit(main) {
       this.ajouterProduit(camera, selectProduit);
     });
   };
-  //-------------
+  //---fonction ajouterProduit: enregistre le produit sélectionné sous forme d'objet dans le localStorage.
   this.ajouterProduit = (camera, selectProduit) => {
     let totalBtnNb = Number(localStorage.getItem("TotalPanier"));
     let index = selectProduit.selectedIndex;
@@ -92,20 +90,15 @@ function Produit(main) {
     let cartString = JSON.stringify(cart);
     localStorage.setItem("cart", cartString);
     localStorage.setItem("TotalPanier", totalBtnNb + 1);
-    dispatchUpdateNbPanier(totalBtnNb + 1);
+    UpdateNbPanier(totalBtnNb + 1);
   };
-  getData(
-    "http://localhost:3000/api/cameras/" + i,
-    (camera) => {
-      this.initProduit(camera);
-    },
-    () => {
-      error();
-    }
-  );
+  //---Utilisation de la fonction getData pour récupérer les données de l'Api
+  getData("http://localhost:3000/api/cameras/" + i, (camera) => {
+    this.initProduit(camera);
+  });
   return this;
 }
-
+//---window.onload: attends la fin du chargement de la page avant d'initialiser les éléments.
 window.onload = () => {
   const main = document.querySelector("main");
   new initGeneral(main);

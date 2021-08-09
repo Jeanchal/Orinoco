@@ -84,7 +84,7 @@ function getData(url, repOk, params = {}) {
   const data = route[url];
   repOk(data);
 }
-describe("Tests (43 tests)", function () {
+describe("Tests (42 tests)", function () {
   let cameras = route["http://localhost:3000/api/cameras"];
   const camera = cameras[0];
   let cart = [
@@ -277,20 +277,13 @@ describe("Tests (43 tests)", function () {
     main.innerHTML = "";
     //--Nettoyage des données utilisées pour le test.
   });
-  it("calculPanier-------(2 tests)", function () {
-    const body = document.querySelector("body");
-    const totalPanier = document.createElement("p");
-    body.appendChild(totalPanier);
+  it("reducer------------(1 test)", function () {
     let tableauPrix = [1, 2, 3, 4];
-    calculPanier(tableauPrix, totalPanier);
+    const reducer = (acc, cur) => acc + cur;
+    let Total = tableauPrix.reduce(reducer);
     //----------------------------------
     expect(Total).toEqual(10);
-    expect(totalPanier.textContent).toEqual("Total: 10 €");
-    //---test 1: on vérifie que les éléments du tableau ont bien été additionnés.
-    //---test 2: on vérifie que le contenu textuel est conforme.
-    totalPanier.innerText = "";
-    body.removeChild(totalPanier);
-  });
+    //---test 2: on vérifie que les éléments du tableau ont bien été additionnés.
   it("removePanier-------(4 tests)", function () {
     const body = document.querySelector("body");
     const main = document.createElement("main");
@@ -311,10 +304,7 @@ describe("Tests (43 tests)", function () {
     expect(conteneur.innerHTML).toEqual("");
     expect(message).not.toBeNull();
     expect(message.textContent).toEqual("Votre panier est vide...");
-    //---test 1: on vérifie que "bonjour" est null.
-    //---test 2: on vérifie le contenu textuel de "conteneur" est vide.
-    //---test 3: on vérifie que le contenu de message n'est pas null.
-    //---test 4: on vérifie que le contenu textuel est conforme.
+    //----------------------------------------
     document.body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
@@ -335,8 +325,7 @@ describe("Tests (43 tests)", function () {
     //-----------------------------------
     expect(TtCmd).toEqual("15");
     expect(conteneur.innerHTML).toEqual("");
-    //---test 1: on vérifie que le contenu textuel est conforme.
-    //---test 2: on vérifie le contenu textuel de "conteneur" est vide.
+    //-----------------------------------
     localStorage.clear();
     //--Nettoyage des données utilisées pour le test.
   });
@@ -364,12 +353,7 @@ describe("Tests (43 tests)", function () {
     expect(email.type).toEqual("email");
     expect(nom.id).toEqual("lastName");
     expect(h3.textContent).toEqual("Nouveau client ?");
-    //---test 1: on vérifie le contenu html de "conteneurPanier" est vide.
-    //---test 2: on vérifie le nombre d'enfants de "form".
-    //---test 3: on vérifie le contenu html de "span".
-    //---test 4: on vérifie le type de "email"
-    //---test 5: on vérifie l'id de "nom".
-    //---test 6: on vérifie que le contenu textuel est conforme.
+    //-------------------------------
     localStorage.clear();
     main.innerHTML = "";
     document.body.removeChild(main);
@@ -412,7 +396,7 @@ describe("Tests (43 tests)", function () {
     panier.validerFormulaire(form);
     //-------------------------------
     expect(conteneur.innerHTML).toEqual("");
-    //---test 1: on vérifie le contenu html de "conteneur" est vide.
+    //-------------------------------
     localStorage.clear();
     main.innerHTML = "";
     document.body.removeChild(main);
@@ -434,9 +418,7 @@ describe("Tests (43 tests)", function () {
     expect(message.textContent).toEqual(
       "Vous n'avez pas encore passé commande chez nous :)"
     );
-    //---test 1: on vérifie le nombre d'enfants de conteneurCmd.
-    //---test 2: on vérifie l'id de conteneurCmd.
-    //---test 3: on vérifie que le contenu textuel de message est conforme.
+    //-------------------------------
     main.innerHTML = "";
     document.body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
@@ -462,10 +444,7 @@ describe("Tests (43 tests)", function () {
     expect(ttCommande).toEqual("Total de la commande : 1000 €");
     expect(msgCommande).toEqual("Bonjour Jean, merci pour votre commande");
     expect(localStorage.getItem("Pseudo")).toBeNull();
-    //---test 1: on vérifie que le contenu textuel est conforme.
-    //---test 2: on vérifie que le contenu textuel est conforme.
-    //---test 3: on vérifie que le contenu textuel est conforme.
-    //---test 4: on vérifie que le contenu du localStorage a bien été effacé.
+    //-------------------------------
     main.innerHTML = "";
     document.body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.

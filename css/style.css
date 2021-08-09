@@ -1,13 +1,26 @@
 @charset "UTF-8";
-.background {
-  background-size: cover;
-  background-repeat: no-repeat;
+.b1 {
+  background-image: url("../images/font1.jpg");
+}
+
+.b2 {
+  background-image: url("../images/font2.jpg");
+}
+
+.b3 {
+  background-image: url("../images/font3.jpg");
+}
+
+.b4 {
+  background-image: url("../images/font4.jpg");
 }
 
 body {
   font-family: "Times New Roman", Times, serif;
   margin: 0 auto 0 auto;
   min-width: 300px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 body p {
