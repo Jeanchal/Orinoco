@@ -149,7 +149,6 @@ header {
     a:active,
     a:visited {
       color: $gris-clair !important;
-      @include transition;
       font-weight: bold;
     }
     a:hover {
