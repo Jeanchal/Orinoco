@@ -84,7 +84,8 @@ function getData(url, repOk, params = {}) {
   const data = route[url];
   repOk(data);
 }
-describe("Tests (43 tests)", function () {
+function redirect() {}
+describe("Tests (44 tests)", function () {
   let cameras = route["http://localhost:3000/api/cameras"];
   const camera = cameras[0];
   let cart = [
@@ -107,9 +108,8 @@ describe("Tests (43 tests)", function () {
     //---test 1: on vérifie que le contenu du main n'est pas null
     //---test 2: on vérifie que l'id du conteneur est conforme au résultat attendu.
     main.innerHTML = "";
-    document.body.removeChild(header);
-    document.body.removeChild(main);
-    document.body.style.backgroundImage = "";
+    body.removeChild(header);
+    body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
   it("UpdateNbPanier-----(1 test)", function () {
@@ -131,9 +131,30 @@ describe("Tests (43 tests)", function () {
     expect(nbpanier.innerText).toEqual("");
     //---test 2: on vérifie que le contenu de nbpanier est conforme au résultat attendu.
     main.innerHTML = "";
-    document.body.removeChild(header);
-    document.body.removeChild(main);
-    document.body.style.backgroundImage = "";
+    body.removeChild(header);
+    body.removeChild(main);
+    //--Nettoyage des données utilisées pour le test.
+  });
+  it("msgError-----------(3 tests)", function () {
+    const body = document.querySelector("body");
+    const main = document.createElement("main");
+    body.appendChild(main);
+    const message = "impossible de se connecter au serveur...";
+    const statut = "statut: 404 no found";
+    msgError(message, statut);
+    const div = main.children[0];
+    const p1 = div.children[0];
+    const p2 = div.children[1];
+    const p3 = div.children[2];
+    //-------------------------
+    expect(p1.textContent).toEqual("Une Erreur est survenue !");
+    expect(p2.textContent).toEqual("impossible de se connecter au serveur...");
+    expect(p3.textContent).toEqual("statut: 404 no found");
+    //---test 1: on vérifie que le contenu textuel est conforme.
+    //---test 2: on vérifie que le contenu textuel est conforme.
+    //---test 3: on vérifie que le contenu textuel est conforme.
+    main.innerHTML = "";
+    body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
   it("initIndex----------(3 tests)", function () {
@@ -167,7 +188,8 @@ describe("Tests (43 tests)", function () {
     //---test 1: on vérifie le nombre d'enfant de "divProduit"
     //---test 2: on vérifie que le contenu textuel de "nomProduit" est conforme.
     //---test 3: on vérifie que le contenu textuel de "ajouterPanier" est conforme.
-    document.body.removeChild(main);
+    main.innerHTML = "";
+    body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
   it("ajouterProduit-----(3 tests)", function () {
@@ -215,7 +237,7 @@ describe("Tests (43 tests)", function () {
     //---test 1: on vérifie que le contenu textuel de "message" est conforme.
     //---test 2: on vérifie que l'id de conteneurPanier est conforme.
     localStorage.clear();
-    document.body.removeChild(main);
+    body.removeChild(main);
     main.innerHTML = "";
     //--Nettoyage des données utilisées pour le test.
   });
@@ -240,7 +262,7 @@ describe("Tests (43 tests)", function () {
     //---test 2: on vérifie que le contenu textuel est conforme.
     //---test 3: on vérifie que le contenu textuel est conforme.
     localStorage.clear();
-    document.body.removeChild(main);
+    body.removeChild(main);
     main.innerHTML = "";
     //--Nettoyage des données utilisées pour le test.
   });
@@ -272,7 +294,7 @@ describe("Tests (43 tests)", function () {
     //---test 2: on vérifie le nombre d'enfants de "conteneur".
     //---test 3: on vérifie que le contenu textuel est conforme.
     //---test 4: on vérifie que le contenu textuel est conforme.
-    document.body.removeChild(main);
+    body.removeChild(main);
     localStorage.clear();
     main.innerHTML = "";
     //--Nettoyage des données utilisées pour le test.
@@ -315,29 +337,8 @@ describe("Tests (43 tests)", function () {
     //---test 2: on vérifie le contenu textuel de "conteneur" est vide.
     //---test 3: on vérifie que le contenu de message n'est pas null.
     //---test 4: on vérifie que le contenu textuel est conforme.
-    document.body.removeChild(main);
-    //--Nettoyage des données utilisées pour le test.
-  });
-  it("commanderPanier----(2 tests)", function () {
-    const main = document.createElement("main");
-    const conteneur = document.createElement("div");
-    const conteneurPanier = document.createElement("div");
-    main.appendChild(conteneur);
-    conteneurPanier.innerHTML = "<div></div>";
-    conteneur.innerHTML = "<div></div>";
-    conteneur.id = "conteneur";
-    localStorage.setItem("cart", cartString);
-    const Total = 15;
-    let panier = new Panier(main);
-    panier.initPanier(cart);
-    panier.commanderPanier(Total);
-    const TtCmd = localStorage.getItem("TotalCommande");
-    //-----------------------------------
-    expect(TtCmd).toEqual("15");
-    expect(conteneur.innerHTML).toEqual("");
-    //---test 1: on vérifie que le contenu textuel est conforme.
-    //---test 2: on vérifie le contenu textuel de "conteneur" est vide.
-    localStorage.clear();
+    main.innerHTML = "";
+    body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
   it("formulaire---------(6 tests)", function () {
@@ -372,7 +373,7 @@ describe("Tests (43 tests)", function () {
     //---test 6: on vérifie que le contenu textuel est conforme.
     localStorage.clear();
     main.innerHTML = "";
-    document.body.removeChild(main);
+    body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
   it("validerFormulaire--(1 test)", function () {
@@ -415,7 +416,7 @@ describe("Tests (43 tests)", function () {
     //---test 1: on vérifie le contenu html de "conteneur" est vide.
     localStorage.clear();
     main.innerHTML = "";
-    document.body.removeChild(main);
+    body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
   it("Commande-----------(3 tests)", function () {
@@ -438,7 +439,7 @@ describe("Tests (43 tests)", function () {
     //---test 2: on vérifie l'id de conteneurCmd.
     //---test 3: on vérifie que le contenu textuel de message est conforme.
     main.innerHTML = "";
-    document.body.removeChild(main);
+    body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
   it("validerCmd---------(4 tests)", function () {
@@ -448,26 +449,33 @@ describe("Tests (43 tests)", function () {
     conteneur.id = "conteneur";
     body.appendChild(main);
     main.appendChild(conteneur);
-    localStorage.setItem("idCmd", 5555);
-    localStorage.setItem("TotalCommande", 1000);
-    const pseudo = "Jean";
-    const commande = new Commande(main);
-    commande.validCmd(pseudo);
+    localStorage.setItem(
+      "recapCmd",
+      JSON.stringify(route["http://localhost:3000/api/cameras/order"])
+    );
+    console.log(
+      JSON.stringify(route["http://localhost:3000/api/cameras/order"])
+    );
+    Commande(main);
     const conteneurCmd = document.querySelector("#conteneur-commande");
     const msgCommande = conteneurCmd.children[0].textContent;
     const idCommande = conteneurCmd.children[1].textContent;
     const ttCommande = conteneurCmd.children[2].textContent;
     //-------------------------------
-    expect(idCommande).toEqual("N° de commande : 5555");
-    expect(ttCommande).toEqual("Total de la commande : 1000 €");
-    expect(msgCommande).toEqual("Bonjour Jean, merci pour votre commande");
-    expect(localStorage.getItem("Pseudo")).toBeNull();
+    expect(idCommande).toEqual(
+      "N° de commande : 2ad9e7e0-f091-11eb-a647-9122577cfbf0"
+    );
+    expect(ttCommande).toEqual("Total de la commande : 499 €");
+    expect(msgCommande).toEqual(
+      "Bonjour dhhdhdi@djbdbd dhhdhdi@djbdbd, merci pour votre commande"
+    );
+    expect(localStorage.getItem("recapCmd")).toBeNull();
     //---test 1: on vérifie que le contenu textuel est conforme.
     //---test 2: on vérifie que le contenu textuel est conforme.
     //---test 3: on vérifie que le contenu textuel est conforme.
     //---test 4: on vérifie que le contenu du localStorage a bien été effacé.
     main.innerHTML = "";
-    document.body.removeChild(main);
+    body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
 });
