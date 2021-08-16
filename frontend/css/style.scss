@@ -158,15 +158,15 @@ header {
     background-color: white;
     @include boxShadow;
     padding: 16px 0 16px 0;
-    font-size: 90%;
+    font-size: 110%;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    @media (min-width: 500px) {
-      font-size: 110%;
-    }
     @media (min-width: 700px) {
       font-size: 130%;
+    }
+    @media (min-width: 1000px) {
+      font-size: 150%;
     }
     a,
     a:active,
@@ -568,6 +568,7 @@ main {
     p:nth-child(2),
     p:nth-child(3) {
       font-size: 120%;
+      text-align: center;
     }
     p:nth-child(2) {
       margin-top: 50px;

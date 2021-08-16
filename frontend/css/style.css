@@ -123,19 +123,19 @@ header nav {
   box-shadow: 1px 3px 5px 2px #a89e9e;
   transition: 0.3s ease-in-out;
   padding: 16px 0 16px 0;
-  font-size: 90%;
+  font-size: 110%;
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
-@media (min-width: 500px) {
-  header nav {
-    font-size: 110%;
-  }
-}
 @media (min-width: 700px) {
   header nav {
     font-size: 130%;
+  }
+}
+@media (min-width: 1000px) {
+  header nav {
+    font-size: 150%;
   }
 }
 header nav a,
@@ -654,6 +654,7 @@ main #conteneur-commande p:nth-child(1) {
 main #conteneur-commande p:nth-child(2),
 main #conteneur-commande p:nth-child(3) {
   font-size: 120%;
+  text-align: center;
 }
 main #conteneur-commande p:nth-child(2) {
   margin-top: 50px;
