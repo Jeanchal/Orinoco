@@ -102,7 +102,7 @@ function Panier(main) {
       }
     });
   };
-  //---fonction formulaire: génére le formulaire.
+  //---fonction formulaire: génére le formulaire de contact.
   this.formulaire = function () {
     const form = document.createElement("form");
     //---fonction creatorForm: pour générer automatiquement une liste d'éléments
