@@ -92,7 +92,19 @@ body {
     position: relative;
     border-radius: 5px;
     bottom: 540px;
-    right: 440px;
+    right: 340px;
+    @media (max-width: 1020px) {
+      right: 240px;
+    }
+    @media (max-width: 850px) {
+      right: 190px;
+    }
+    @media (max-width: 700px) {
+      bottom: 490px;
+      right: 0;
+      left: 25px;
+      font-size: 90%;
+    }
     span {
       font-size: 150%;
       opacity: 0.7;

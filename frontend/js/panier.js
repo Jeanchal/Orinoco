@@ -112,7 +112,7 @@ function Panier(main) {
       element.name = text;
       element.required = true;
       element.type = "text";
-      element.minLength = "5";
+      element.minLength = "3";
       element.maxLength = "25";
     }
     const h3 = document.createElement("h3");
