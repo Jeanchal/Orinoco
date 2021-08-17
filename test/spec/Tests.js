@@ -85,7 +85,7 @@ function getData(url, repOk, params = {}) {
   repOk(data);
 }
 function redirect() {}
-describe("Tests (44 tests)", function () {
+describe("Tests (45 tests)", function () {
   let cameras = route["http://localhost:3000/api/cameras"];
   const camera = cameras[0];
   let cart = [
@@ -105,14 +105,14 @@ describe("Tests (44 tests)", function () {
     //--------------------------------
     expect(main.innerHTML).not.toBeNull();
     expect(conteneur.id).toEqual("conteneur");
-    //---test 1: on vérifie que le contenu du main n'est pas null
+    //---test 1: on vérifie que le contenu du "main" n'est pas nul.
     //---test 2: on vérifie que l'id du conteneur est conforme au résultat attendu.
     main.innerHTML = "";
     body.removeChild(header);
     body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
   });
-  it("UpdateNbPanier-----(1 test)", function () {
+  it("UpdateNbPanier-----(2 tests)", function () {
     const body = document.querySelector("body");
     const main = document.createElement("main");
     const header = document.createElement("header");
@@ -125,11 +125,11 @@ describe("Tests (44 tests)", function () {
     new initGeneral(main);
     //--------------------------------
     expect(nbpanier.innerText).toEqual("2");
-    //---test 1: on vérifie que le contenu de nbpanier est conforme au résultat attendu.
+    //---test 1: on ajoute "2" à "TotalPanier " dans le localStorage et on vérifie que le nombre d'artciles c'est bien mis à jour.
     localStorage.clear();
     new initGeneral(main);
     expect(nbpanier.innerText).toEqual("");
-    //---test 2: on vérifie que le contenu de nbpanier est conforme au résultat attendu.
+    //---test 2: on supprime le contenu du localStorage et on vérifie que le nombre d'articles disparait.
     main.innerHTML = "";
     body.removeChild(header);
     body.removeChild(main);
@@ -150,9 +150,9 @@ describe("Tests (44 tests)", function () {
     expect(p1.textContent).toEqual("Une Erreur est survenue !");
     expect(p2.textContent).toEqual("impossible de se connecter au serveur...");
     expect(p3.textContent).toEqual("statut: 404 no found");
-    //---test 1: on vérifie que le contenu textuel est conforme.
-    //---test 2: on vérifie que le contenu textuel est conforme.
-    //---test 3: on vérifie que le contenu textuel est conforme.
+    //---test 1: on vérifie que le contenu textuel du paragraphe 1 est conforme.
+    //---test 2: on vérifie que le contenu textuel du paragraphe 2 est conforme.
+    //---test 3: on vérifie que le contenu textuel du paragraphe 3 est conforme.
     main.innerHTML = "";
     body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
@@ -166,9 +166,9 @@ describe("Tests (44 tests)", function () {
     expect(conteneur.childElementCount).toEqual(5);
     expect(nomTest.textContent).toEqual("Hirsch 400DTS");
     expect(prixTest.textContent).toEqual("599 €");
-    //---test 1: on vérifie le nombre d'enfant de "conteneur"
-    //---test 2: on vérifie que le contenu textuel de "nomTest" est conforme.
-    //---test 3: on vérifie que le contenu textuel de "prixTest" est conforme.
+    //---test 1: on vérifie le nombre d'enfant de l'élément "conteneur"
+    //---test 2: on vérifie le contenu textuel du nom d'un d'article aléatoire.
+    //---test 3: on vérifie le contenu textuel du prix d'un d'article aléatoire.
   });
   it("initProduit--------(3 tests)", function () {
     const body = document.querySelector("body");
@@ -213,8 +213,8 @@ describe("Tests (44 tests)", function () {
     expect(cart).not.toBeNull();
     expect(cart[0].id).toEqual("5be1ed3f1c9d44000030b061");
     //---test 1: on vérifie que "TtPanier" (nb d'articles ajoutés) est égal à 1;
-    //---test 2: on vérifie que le contenu l'objet "cart" n'est pas null.
-    //---test 3: on vérifie que le contenu est conforme.
+    //---test 2: on vérifie que le contenu l'objet "cart" n'est pas nul.
+    //---test 3: on vérifie que le contenu de l'Id est conforme.
     main.innerHTML = "";
     localStorage.clear();
     //--Nettoyage des données utilisées pour le test.
@@ -259,8 +259,8 @@ describe("Tests (44 tests)", function () {
     expect(btnCommander.textContent).toEqual("Commander");
     expect(btnViderPanier.textContent).toEqual("Vider le panier");
     //---test 1: on vérifie le nombre d'enfants de "conteneurPanier".
-    //---test 2: on vérifie que le contenu textuel est conforme.
-    //---test 3: on vérifie que le contenu textuel est conforme.
+    //---test 2: on vérifie que le contenu textuel du bouton "Commander" est conforme.
+    //---test 3: on vérifie que le contenu textuel du bouton "Vider le panier" est conforme.
     localStorage.clear();
     body.removeChild(main);
     main.innerHTML = "";
@@ -290,10 +290,10 @@ describe("Tests (44 tests)", function () {
     expect(conteneur.childElementCount).toEqual(1);
     expect(nameArticle.textContent).toEqual("Zurss 50S/35mm 1.4");
     expect(nbArticle.textContent).toEqual("2");
-    //---test 1: on vérifie que le contenu de "conteneur" n'est pas null.
+    //---test 1: on vérifie que le contenu de "conteneur" n'est pas nul.
     //---test 2: on vérifie le nombre d'enfants de "conteneur".
-    //---test 3: on vérifie que le contenu textuel est conforme.
-    //---test 4: on vérifie que le contenu textuel est conforme.
+    //---test 3: on vérifie le contenu textuel du nom d'un article aléatoire.
+    //---test 4: on vérifie le nombre d'articles du produit sélectionné.
     body.removeChild(main);
     localStorage.clear();
     main.innerHTML = "";
@@ -309,7 +309,7 @@ describe("Tests (44 tests)", function () {
     expect(Total).toEqual(10);
     expect(totalPanier.textContent).toEqual("Total: 10 €");
     //---test 1: on vérifie que les éléments du tableau ont bien été additionnés.
-    //---test 2: on vérifie que le contenu textuel est conforme.
+    //---test 2: on vérifie le contenu textuel du total du panier.
     totalPanier.innerText = "";
     body.removeChild(totalPanier);
   });
@@ -333,10 +333,10 @@ describe("Tests (44 tests)", function () {
     expect(conteneur.innerHTML).toEqual("");
     expect(message).not.toBeNull();
     expect(message.textContent).toEqual("Votre panier est vide...");
-    //---test 1: on vérifie que "bonjour" est null.
-    //---test 2: on vérifie le contenu textuel de "conteneur" est vide.
-    //---test 3: on vérifie que le contenu de message n'est pas null.
-    //---test 4: on vérifie que le contenu textuel est conforme.
+    //---test 1: vérifie les données du formulaire et les envoie au serveur si les elles sont conformes
+    //---test 2: on vérifie le contenu textuel de "conteneur" est vide
+    //---test 3: on vérifie que le contenu de message n'est pas nul.
+    //---test 4: on vérifie que le contenu  textuel  du message est conforme.
     main.innerHTML = "";
     body.removeChild(main);
     //--Nettoyage des données utilisées pour le test.
@@ -370,7 +370,7 @@ describe("Tests (44 tests)", function () {
     //---test 3: on vérifie le contenu html de "span".
     //---test 4: on vérifie le type de "email"
     //---test 5: on vérifie l'id de "nom".
-    //---test 6: on vérifie que le contenu textuel est conforme.
+    //---test 6: on vérifie que le contenu textuel du titre est conforme.
     localStorage.clear();
     main.innerHTML = "";
     body.removeChild(main);
@@ -470,9 +470,9 @@ describe("Tests (44 tests)", function () {
       "Bonjour dhhdhdi@djbdbd dhhdhdi@djbdbd, merci pour votre commande"
     );
     expect(localStorage.getItem("recapCmd")).toBeNull();
-    //---test 1: on vérifie que le contenu textuel est conforme.
-    //---test 2: on vérifie que le contenu textuel est conforme.
-    //---test 3: on vérifie que le contenu textuel est conforme.
+    //---test 1: on vérifie que le contenu textuel de l'id de la commande est conforme.
+    //---test 2: on vérifie que le contenu textuel du total de la commande est conforme.
+    //---test 3: on vérifie que le contenu textuel du message de confirmation de commande est conforme.
     //---test 4: on vérifie que le contenu du localStorage a bien été effacé.
     main.innerHTML = "";
     body.removeChild(main);
