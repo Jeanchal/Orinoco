@@ -1,10 +1,10 @@
 $beige: rgba(250, 241, 227, 0.7);
 $beige-clair: rgba(250, 241, 227, 0.7);
-$beige-foncé: rgb(168, 158, 158);
+$beige-fonce: rgb(168, 158, 158);
 $gris: rgb(75, 75, 75);
 $gris-clair: rgb(105, 105, 105);
 @mixin border {
-  border: 4px ridge $beige-foncé;
+  border: 4px ridge $beige-fonce;
   box-shadow: none !important;
 }
 @mixin dim100 {
@@ -19,7 +19,7 @@ $gris-clair: rgb(105, 105, 105);
   background-color: $beige;
 }
 @mixin boxShadow {
-  box-shadow: 1px 3px 5px 2px $beige-foncé;
+  box-shadow: 1px 3px 5px 2px $beige-fonce;
   transition: 0.3s ease-in-out;
 }
 @mixin btnHover {
@@ -47,20 +47,24 @@ $gris-clair: rgb(105, 105, 105);
   transition: 0.3s ease-in-out;
 }
 
-.b3 main .error {
-  background-color: rgba(255, 255, 255, 0.5);
-  @include boxShadow;
-}
-.b1 {
+.backgrndPanier {
   background-image: url("../images/font1.jpg");
 }
-.b2 {
+.backgrndProduit {
   background-image: url("../images/font2.jpg");
+  main .error {
+    background-color: rgba(255, 255, 255, 0.5);
+    @include boxShadow;
+  }
 }
-.b3 {
+.backgrndIndex {
   background-image: url("../images/font3.jpg");
+  main .error {
+    background-color: rgba(255, 255, 255, 0.5);
+    @include boxShadow;
+  }
 }
-.b4 {
+.backgrndCommande {
   background-image: url("../images/font4.jpg");
 }
 
@@ -588,7 +592,7 @@ main {
   }
 }
 footer {
-  box-shadow: 1px -2px 5px 2px $beige-foncé;
+  box-shadow: 1px -2px 5px 2px $beige-fonce;
   @include tailleMax;
   @include bckgrndBeige;
   min-height: 200px;

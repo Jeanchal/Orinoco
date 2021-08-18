@@ -5,6 +5,7 @@ function initGeneral(main) {
   const conteneur = document.createElement("div");
   main.appendChild(conteneur);
   conteneur.id = "conteneur";
+
   //---événement "updateCart": affiche le nombre d'articles dans la barre de navigation, si ce nombre est supérieur à 0.
   document.addEventListener("updateCart", (e) => {
     const nbArticle = e.detail.nbArticle;
@@ -16,6 +17,7 @@ function initGeneral(main) {
   });
   UpdateNbPanier(totalBtnNb);
 }
+
 //---fonction UpdateNbPanier: mets à jour le nombre d'articles dans le panier (dans la barre de navigation).
 function UpdateNbPanier(nbArticle) {
   let updatePanier = new CustomEvent("updateCart", {
@@ -25,6 +27,7 @@ function UpdateNbPanier(nbArticle) {
   });
   document.dispatchEvent(updatePanier);
 }
+
 //---fonction getData: permet de faire un fetch pour récupérer, envoyer, mettre à jour ou supprimer de la data.
 function getData(url, repOk, params = {}) {
   "impossible de se connecter au serveur...";
@@ -45,15 +48,18 @@ function getData(url, repOk, params = {}) {
       msgError(message, erreur);
     });
 }
+
 //---fonction getQueryParams: permet de récupérer l'id dans l'Url de la page.
 function getQueryParams(param) {
   const SearchParams = new URLSearchParams(window.location.search);
   return SearchParams.get(param);
 }
+
 //---fonction redirect: permet de rediriger vers une autre page
 function redirect(cible) {
   window.location = cible;
 }
+
 //---fonction msgError: génére un message d'erreur pour les erreurs de connexion.
 function msgError(message, indice) {
   const main = document.querySelector("main");

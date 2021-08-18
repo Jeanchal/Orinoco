@@ -9,6 +9,7 @@ function Produit(main) {
     cartString = localStorage.getItem("cart");
     cart = JSON.parse(cartString);
   }
+
   //---fonction initProduit: génére le produit sélectionné
   this.initProduit = (camera) => {
     //-----Création des éléments-------------------
@@ -64,6 +65,7 @@ function Produit(main) {
       this.ajouterProduit(camera, selectProduit);
     });
   };
+
   //---fonction ajouterProduit: enregistre le produit sélectionné sous forme d'objet dans le localStorage.
   this.ajouterProduit = (camera, selectProduit) => {
     let totalBtnNb = Number(localStorage.getItem("TotalPanier"));
@@ -92,12 +94,14 @@ function Produit(main) {
     localStorage.setItem("TotalPanier", totalBtnNb + 1);
     UpdateNbPanier(totalBtnNb + 1);
   };
+
   //---Utilisation de la fonction getData pour récupérer les données de l'Api
   getData("http://localhost:3000/api/cameras/" + i, (camera) => {
     this.initProduit(camera);
   });
   return this;
 }
+
 //---window.onload: attends la fin du chargement de la page avant d'initialiser les éléments.
 window.onload = () => {
   const main = document.querySelector("main");

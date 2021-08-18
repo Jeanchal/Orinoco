@@ -9,6 +9,7 @@ function Panier(main) {
   if (localStorage.getItem("TotalPanier") > 0) {
     cart = JSON.parse(cartString);
   }
+
   //---fonction initPanier: englobe toutes les fonctions qui permettent d'afficher et de manipuler le panier.
   this.initPanier = (cameras) => {
     const totalPanier = document.createElement("p");
@@ -23,6 +24,7 @@ function Panier(main) {
     messagePanier.textContent = "Votre panier est vide...";
     btnCommander.textContent = "Commander";
     btnViderPanier.textContent = "Vider le panier";
+
     //---fonction activPanier: ajoute les boutons "Commander", "Vider panier", et le total du Panier
     this.activPanier = () => {
       conteneurPanier.removeChild(messagePanier);
@@ -33,6 +35,7 @@ function Panier(main) {
     if (localStorage.getItem("TotalPanier") > 0) {
       this.activPanier();
     }
+
     //---fonction panierConstructor: génére les éléments ajoutés au panier.
     this.panierConstructor = (cart, cameras, a, i) => {
       localStorage.setItem("form", 0);
@@ -81,6 +84,7 @@ function Panier(main) {
         this.formulaire();
       }
     }
+
     //---fonction removePanier: supprime tout les éléments du panier sur la page et dans le localStorage
     this.removePanier = () => {
       conteneur.innerHTML = "";
@@ -89,11 +93,13 @@ function Panier(main) {
       localStorage.clear();
       UpdateNbPanier(0);
     };
+
     //---événement sur bouton "Commander": appelle les fonctions "commanderPanier", "formulaire", et enregistre l'activation du formualire dans le localStorage.
     btnCommander.addEventListener("click", () => {
       this.formulaire();
       localStorage.setItem("form", 1);
     });
+
     //---événement sur bouton "Vider Panier": active la fonction removePanier.
     btnViderPanier.addEventListener("click", () => {
       let reponse = window.confirm("Souhaitez-vous vraiment vider le panier?");
@@ -102,9 +108,11 @@ function Panier(main) {
       }
     });
   };
+
   //---fonction formulaire: génére le formulaire de contact.
   this.formulaire = function () {
     const form = document.createElement("form");
+
     //---fonction creatorForm: pour générer automatiquement une liste d'éléments
     function creatorForm(element, text) {
       form.appendChild(element);
@@ -115,6 +123,7 @@ function Panier(main) {
       element.minLength = "3";
       element.maxLength = "25";
     }
+
     const h3 = document.createElement("h3");
     const prenom = document.createElement("input");
     const nom = document.createElement("input");
@@ -149,11 +158,13 @@ function Panier(main) {
     btnValider.id = "btnValider";
     btnValider.value = "Valider";
     h3.innerText = "Nouveau client ?";
+
     //---événement sur bouton "retour": pour annuler le formulaire et revenir sur le panier.
     retour.addEventListener("click", () => {
       localStorage.setItem("form", 0);
       window.location = "panier.html";
     });
+
     //---événement "submit" du formulaire: pour venvoyer le formulaire si les données sont conformes.
     form.addEventListener("submit", (e) => {
       const input = document.getElementsByTagName("input");
@@ -173,6 +184,7 @@ function Panier(main) {
       }
     });
   };
+
   //---fonction validerFormulaire: vérifie les données du formulaire et les envoie au serveur si conforme.
   this.validerFormulaire = function (form) {
     conteneur.innerHTML = "";
@@ -195,6 +207,7 @@ function Panier(main) {
       },
       products: tableauID,
     };
+
     //---Utilisation de la fonction getData pour envoyer des données et enregistrer la réponse du serveur.
     getData(
       "http://localhost:3000/api/cameras/order",
@@ -212,12 +225,14 @@ function Panier(main) {
       }
     );
   };
+
   //---Utilisation de la fonction getData pour récupérer les données de l'Api
   getData("http://localhost:3000/api/cameras", (cameras) => {
     this.initPanier(cameras);
   });
   return this;
 }
+
 //---window.onload: attends la fin du chargement de la page avant d'initialiser les éléments.
 window.onload = () => {
   const main = document.querySelector("main");

@@ -27,11 +27,13 @@ function Index(conteneur) {
       prix.textContent = `${cameras[i].price / 100} €`;
     }
   };
+
   //---Utilisation de la fonction getData pour récupérer les données de l'Api
   getData("http://localhost:3000/api/cameras", (cameras) => {
     this.initIndex(cameras);
   });
 }
+
 //---window.onload: attends la fin du chargement de la page avant d'initialiser les éléments.
 window.onload = () => {
   const main = document.querySelector("main");

@@ -1,23 +1,27 @@
 @charset "UTF-8";
-.b3 main .error {
+.backgrndPanier {
+  background-image: url("../images/font1.jpg");
+}
+
+.backgrndProduit {
+  background-image: url("../images/font2.jpg");
+}
+.backgrndProduit main .error {
   background-color: rgba(255, 255, 255, 0.5);
   box-shadow: 1px 3px 5px 2px #a89e9e;
   transition: 0.3s ease-in-out;
 }
 
-.b1 {
-  background-image: url("../images/font1.jpg");
-}
-
-.b2 {
-  background-image: url("../images/font2.jpg");
-}
-
-.b3 {
+.backgrndIndex {
   background-image: url("../images/font3.jpg");
 }
+.backgrndIndex main .error {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 1px 3px 5px 2px #a89e9e;
+  transition: 0.3s ease-in-out;
+}
 
-.b4 {
+.backgrndCommande {
   background-image: url("../images/font4.jpg");
 }
 
