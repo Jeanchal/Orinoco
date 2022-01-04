@@ -4,7 +4,7 @@ Voici les instructions pour lancer le serveur du projet Orinoco.
 
 ### Prérequis
 
-Vous aurez besoin d'avoir Node et "npm" installés localement sur votre machine.
+Vous aurez besoin d'avoir "node.js" et "npm" installés localement sur votre machine.
 
 ### Installation
 
