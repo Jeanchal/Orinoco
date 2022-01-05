@@ -2,6 +2,10 @@
 
 Voici les instructions pour lancer le serveur du projet Orinoco.
 
+### Description
+
+Orinoco est une application frontend de E-commerce codé en javascript. Sur cette application vous pouvez sélectionner et personnaliser des produits, les ajouter au panier et passer commande.
+
 ### Prérequis
 
 Vous aurez besoin d'avoir "node.js" et "npm" installés localement sur votre machine.
